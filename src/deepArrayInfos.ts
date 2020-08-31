@@ -22,18 +22,18 @@ const depthArray = (arr: RecursiveArray): number => {
         : 0;
 }
 
-const findExtremInArray = (arr: RecursiveArray, isMax: boolean): number => {
+const findExtremValueInArray = (arr: RecursiveArray, isMax: boolean): number => {
     const compare = isMax ? Math.max : Math.min;
     return arr.reduce<number>((current, value) => {
         return compare(
             current,
-            (typeof value === 'number') ? value : findExtremInArray(value, isMax)
+            (typeof value === 'number') ? value : findExtremValueInArray(value, isMax)
         );
     }, isMax ? -Infinity : Infinity);
 }
 
-const findLargestInArray = (arr: RecursiveArray): number => findExtremInArray(arr, true);
-const findSmallestInArray = (arr: RecursiveArray): number => findExtremInArray(arr, false);
+const findLargestInArray = (arr: RecursiveArray): number => findExtremValueInArray(arr, true);
+const findSmallestInArray = (arr: RecursiveArray): number => findExtremValueInArray(arr, false);
 
 const array: RecursiveArray = [1, [[2], 3], [4], 5, [6, 42, [[86], [[12]], 1337]], 1];
 

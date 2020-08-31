@@ -6,14 +6,14 @@ and groups the elements of the sequence based on the result of Fn.
 type GroupByCallback<T, U> = (value: T) => U;
 
 // remove any type
-const groupBy = <T, U>(arr: T[], cb: GroupByCallback<T, U>): any => {
-    const groups: any = {};
+const groupBy = <T, U>(arr: T[], cb: GroupByCallback<T, U>): Map<U, T[]> => {
+    const groups = new Map<U, T[]>();
     for (const value of arr) {
         const key = cb(value);
-        if (!groups[key]) {
-            groups[key] = []
+        if (!groups.has(key)) {
+            groups.set(key, []);
         }
-        groups[key].push(value);
+        groups.get(key).push(value);
     }
     return groups;
 }
